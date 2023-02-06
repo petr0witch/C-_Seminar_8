@@ -286,21 +286,19 @@ Show3D(UpdateArr);
 // 11 16 15 06
 // 10 09 08 07
 
-/*
+
 int[,] CreateRandom2dArray()
 {
     Console.Write("Input a number of rows: ");
     int rows = Convert.ToInt32(Console.ReadLine());
     Console.Write("Input a number of columns: ");
     int cols = Convert.ToInt32(Console.ReadLine());
-    int val = 0;
     int[,] array = new int[rows, cols];
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j++)
         {
-            array[i, j] = val;
-            val++;         
+            array[i, j] = 0;       
         }
     }
     return array;
@@ -317,7 +315,44 @@ void Show2dArray(int[,] array)
     Console.WriteLine();
 }
 
+int[,] Sort(int[,] array)
+{   
+    int val = 1;
+    for(int i = 0; i < array.GetLength(0); i++)
+    {
+        for(int j = 0; j < array.GetLength(1); j++)
+        {
+            if(array[i, j] == 0) 
+            {
+                void InterNum(int i, int j)
+                {   
+                    array[i, j] = val;
+                    val++;
+                    InterNum(i, j + 1);
+                    InterNum(i + 1, j);
+                    InterNum(i, j - 1);
+                    InterNum(i - 1, j);
+                }
+            }
+        }
+    }
+    return array;
+}
+/*
+void InterNum(int rows, int cols)
+{   
+    int val = 0;
+    if(array[rows, cols] == 0)
+    {
+        array[rows, cols] = val;
+        InterNum(rows, cols + 1);
+        InterNum(rows + 1, cols);
+        InterNum(rows, cols - 1);
+        InterNum(rows - 1, cols);
+    }
+}*/
 
 int[,] NewArray = CreateRandom2dArray();
 Show2dArray(NewArray);
-*/
+
+Show2dArray(Sort(NewArray));
